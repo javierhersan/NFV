@@ -33,3 +33,4 @@ COPY vnx_config_nat /usr/bin/
 COPY isc-dhcp-server /etc/default/isc-dhcp-server
 COPY dhcpd.conf /etc/dhcp/dhcpd.conf
 COPY simple_switch_13.py /ryu/simple_switch_13.py
+COPY simple_switch_13.py /ryu/qos_simple_switch_13.py
