@@ -27,6 +27,7 @@ RUN apt-get update \
 
 RUN git clone https://github.com/osrg/ryu.git 
 RUN cd ryu && pip install .
+RUN mkdir -p /ryu
 
 
 COPY vnx_config_nat /usr/bin/

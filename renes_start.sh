@@ -82,3 +82,14 @@ sleep 10
 ## 6. En VNF:cpe activar NAT para dar salida a Internet
 echo "## 6. En VNF:cpe activar NAT para dar salida a Internet"
 $CPE_EXEC /usr/bin/vnx_config_nat brint net1
+
+## 7. En VNF:cpe activar arpwatch
+echo "## 7. En VNF:cpe activar arpwatch"
+$CPE_EXEC chkconfig --level 35 arpwatch on
+$CPE_EXEC /etc/init.d/arpwatch start
+# Watch: arpwatch -i eth0
+# Watch: arp -a 
+
+## 8. En VNF:access activar ryu controller y qos rules
+echo "## 8. En VNF:access activar ryu controller y qos rules"
+# $ACC_EXEC ovs-vsctl add-br brint
