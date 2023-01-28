@@ -17,8 +17,19 @@ RUN apt-get update \
     openvswitch-common \
     iperf3 \
     iproute2 \
-    vim
+    vim \
+    arpwatch \
+    git \
+    python3.6 \
+    python-dev \
+    python-setuptools \
+    python3-pip
+
+RUN git clone https://github.com/osrg/ryu.git 
+RUN cd ryu && pip install .
+
 
 COPY vnx_config_nat /usr/bin/
 COPY isc-dhcp-server /etc/default/isc-dhcp-server
-COPY dhcpd.conf /etc/dhcp/dhcpd.conf 
+COPY dhcpd.conf /etc/dhcp/dhcpd.conf
+COPY simple_switch_13.py /ryu/simple_switch_13.py
