@@ -30,9 +30,8 @@ RUN echo deb http://archive.ubuntu.com/ubuntu trusty main universe restricted mu
 RUN apt-get update
 RUN apt-get install -y sysv-rc-conf
 RUN sysv-rc-conf --level 35 arpwatch on
-RUN echo ARGS=\”-N -p\” >> etc/default/arpwatch
-RUN echo RUNAS=\”arpwatch\” >> etc/default/arpwatch
-RUN echo ‘INTERFACES=\”brint\” >> etc/default/arpwatch
+COPY arpwatch /etc/default/arpwatch
+
 
 # ryu
 RUN git clone https://github.com/osrg/ryu.git 
