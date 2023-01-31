@@ -56,11 +56,12 @@ $CPE_EXEC service openvswitch-switch start
 
 ## 3. En VNF:access agregar un bridge y configurar IPs y rutas
 echo "## 3. En VNF:access agregar un bridge y configurar IPs y rutas"
+#$ACC_EXEC ovs-vsctl del-br brint
 $ACC_EXEC ovs-vsctl add-br brint
 $ACC_EXEC ovs-vsctl set bridge brint protocols=OpenFlow10,OpenFlow12,OpenFlow13
 $ACC_EXEC ovs-vsctl set-fail-mode brint secure
 $ACC_EXEC ovs-vsctl set bridge brint other-config:datapath-id=0000000000000001
-$ACC_EXEC ifconfig net1 $VNFTUNIP/24
+$ACC_EXEC ifconfig brint $VNFTUNIP/24
 #$ACC_EXEC ovs-vsctl add-port brint vxlanacc -- set interface vxlanacc type=vxlan options:remote_ip=$HOMETUNIP
 #$ACC_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPCPE options:key=inet options:dst_port=8742
 $ACC_EXEC ip link add vxlanacc type vxlan id 0 remote $HOMETUNIP dstport 4789 dev net1
