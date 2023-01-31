@@ -70,7 +70,7 @@ $ACC_EXEC ovs-vsctl add-port brint vxlanacc
 $ACC_EXEC ovs-vsctl add-port brint vxlanint
 $ACC_EXEC ifconfig vxlanacc up
 $ACC_EXEC ifconfig vxlanint up
-$ACC_EXEC ovs-vsctl set-controller br0 tcp:127.0.0.1:6633
+$ACC_EXEC ovs-vsctl set-controller brint tcp:127.0.0.1:6633
 $ACC_EXEC ovs-vsctl set-manager ptcp:6632
 $ACC_EXEC ip route add $IPCPE/32 via $K8SGW
 
