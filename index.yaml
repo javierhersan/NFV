@@ -3,23 +3,23 @@ entries:
   accesschart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-11-13T19:44:20.802372601+01:00"
+    created: "2023-02-02T00:26:58.995863572+01:00"
     description: A Helm chart for Kubernetes
-    digest: b6eff9cf299a4f1d7c806421e0fef9f39e59e31e15777f56a872f3cfe3303766
+    digest: ed5044834a08c37f83f33172e75c263198e7842457a7fa6796fcde9cce59453a
     name: accesschart
     type: application
     urls:
-    - https://educaredes.github.io/nfv-lab/accesschart-0.1.0.tgz
+    - https://javierhersan.github.io/NFV/accesschart-0.1.0.tgz
     version: 0.1.0
   cpechart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-11-13T19:44:20.805525147+01:00"
+    created: "2023-02-02T00:26:58.997023898+01:00"
     description: A Helm chart for Kubernetes
-    digest: 33e7a2973a7664e175bccb21815e3fa0aaf2e41a8d6a41e8a15490f2c4e0136b
+    digest: d5f1859bb3737056ae96efce1c713fc5f73e38e3f99b51be8fec0996e6a36715
     name: cpechart
     type: application
     urls:
-    - https://educaredes.github.io/nfv-lab/cpechart-0.1.0.tgz
+    - https://javierhersan.github.io/NFV/cpechart-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-13T19:44:20.772735265+01:00"
+generated: "2023-02-02T00:26:58.992438302+01:00"
