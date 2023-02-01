@@ -58,20 +58,29 @@ $CPE_EXEC service openvswitch-switch start
 echo "## 3. En VNF:access agregar un bridge y configurar IPs y rutas"
 $ACC_EXEC ovs-vsctl add-br brint
 $ACC_EXEC ifconfig net1 $VNFTUNIP/24
-$ACC_EXEC ovs-vsctl add-port brint vxlanacc -- set interface vxlanacc type=vxlan options:remote_ip=$HOMETUNIP
-$ACC_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPCPE options:key=inet options:dst_port=8742
+#$ACC_EXEC ovs-vsctl add-port brint vxlanacc -- set interface vxlanacc type=vxlan options:remote_ip=$HOMETUNIP
+#$ACC_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPCPE options:key=inet options:dst_port=8742
+$ACC_EXEC ip link add vxlanacc type vxlan id 0 remote $HOMETUNIP dstport 4789 dev net1
+# En la siguiente línea se ha corregido el dispositivo, que debe ser eth0
+$ACC_EXEC ip link add vxlanint type vxlan id 1 remote $IPCPE dstport 8742 dev eth0
+$ACC_EXEC ovs-vsctl add-port brint vxlanacc
+$ACC_EXEC ovs-vsctl add-port brint vxlanint
+$ACC_EXEC ifconfig vxlanacc up
+$ACC_EXEC ifconfig vxlanint up
 $ACC_EXEC ip route add $IPCPE/32 via $K8SGW
 
 ## 4. En VNF:cpe agregar un bridge y configurar IPs y rutas
 echo "## 4. En VNF:cpe agregar un bridge y configurar IPs y rutas"
 $CPE_EXEC ovs-vsctl add-br brint
 $CPE_EXEC ifconfig brint $VCPEPRIVIP/24
-$CPE_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPACCESS options:key=inet options:dst_port=8742
+#$CPE_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPACCESS options:key=inet options:dst_port=8742
+$CPE_EXEC ovs-vsctl add-port brint vxlanint -- set interface vxlanint type=vxlan options:remote_ip=$IPACCESS options:key=1 options:dst_port=8742
 $CPE_EXEC ifconfig brint mtu 1400
 $CPE_EXEC ifconfig net1 $VCPEPUBIP/24
 $CPE_EXEC ip route add $IPACCESS/32 via $K8SGW
 $CPE_EXEC ip route del 0.0.0.0/0 via $K8SGW
 $CPE_EXEC ip route add 0.0.0.0/0 via $VCPEGW
+# ip -d link show vxlanacc
 
 ## 5. En VNF:cpe iniciar Servidor DHCP
 echo "## 5. En VNF:cpe iniciar Servidor DHCP"
@@ -82,3 +91,8 @@ sleep 10
 ## 6. En VNF:cpe activar NAT para dar salida a Internet
 echo "## 6. En VNF:cpe activar NAT para dar salida a Internet"
 $CPE_EXEC /usr/bin/vnx_config_nat brint net1
+
+## 7. En VNF:cpe activar arpwatch
+echo "## 7. En VNF:cpe activar arpwatch"
+$CPE_EXEC /etc/init.d/arpwatch start
+# $CPE_EXEC /etc/init.d/arpwatch start
