@@ -8,8 +8,6 @@ CMD=$(osm k8scluster-show --literal $KID | grep -A1 projects)
 export OSMNS=${CMD:24:37}
 echo $OSMNS
 
-firefox 192.168.56.12 &
-
 osm repo-add helmchartrepo https://javierhersan.github.io/NFV --type helm-chart --description "NFV"
 
 cd ~/shared/NFV/pck
