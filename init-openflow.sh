@@ -1,10 +1,10 @@
 #!/bin/bash
 
-while getopts h11:h12: flag
+while getopts a:b: flag
 do
     case "${flag}" in
-        h11) h11=${OPTARG};;
-        h12) h12=${OPTARG};;
+        a) h11=${OPTARG};;
+        b) h12=${OPTARG};;
     esac
 done
 
