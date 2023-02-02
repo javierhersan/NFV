@@ -22,11 +22,13 @@ RUN apt-get update \
     iperf3 \
     iproute2 \
     vim \
-    arpwatch
+    ryu-bin
 
 COPY vnx_config_nat /usr/bin/
 COPY isc-dhcp-server /etc/default/isc-dhcp-server
-COPY dhcpd.conf /etc/dhcp/dhcpd.conf 
+COPY dhcpd.conf /etc/dhcp/dhcpd.conf
+COPY ./ryu/ /ryu/
+COPY openflow.sh .
 
 # ----------------------Ryu--------------------------
 #RUN apt-get install -y \
@@ -40,12 +42,12 @@ COPY dhcpd.conf /etc/dhcp/dhcpd.conf
 #RUN git clone https://github.com/osrg/ryu.git 
 #RUN cd ryu && pip install .
 #RUN mkdir -p /ryu
-#COPY simple_switch_13.py /ryu/qos_simple_switch_13.py
+
 
 # arpwatch
-RUN echo deb http://archive.ubuntu.com/ubuntu trusty main universe restricted multiverse >> /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get install -y sysv-rc-conf
-RUN sysv-rc-conf --level 35 arpwatch on
-COPY arpwatch /etc/default/arpwatch
+#RUN echo deb http://archive.ubuntu.com/ubuntu trusty main universe restricted multiverse >> /etc/apt/sources.list
+#RUN apt-get update
+#RUN apt-get install -y sysv-rc-conf
+#RUN sysv-rc-conf --level 35 arpwatch on
+#COPY arpwatch /etc/default/arpwatch
 
