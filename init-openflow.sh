@@ -14,10 +14,12 @@ deployment_id() {
 
 if [[ $h11 == "" ]] || [[ $h12 == "" ]]
 then
-    echo "Se deben definir las IPs de las redes residenciales"
+    echo "init-openflow.sh: IPs not defined"
 else
     # OpenFlow for renes1
-    echo "Iniciando OpenFlow en renes1 ..."
+    echo "h11:"$h11
+    echo "h12:"$h12
+    echo "Iniciando OpenFlow en renes ..."
     OSMACC1=$(deployment_id renes1 "access")
     VACC1="deploy/$OSMACC1"
     if [[ ! $VACC1 =~ "helmchartrepo-accesschart"  ]]; then

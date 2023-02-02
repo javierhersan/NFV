@@ -10,9 +10,11 @@ done
 
 if [[ $h11 == "" ]] || [[ $h12 == "" ]]
 then
-    echo "Se deben definir las IPs de la red residencial"
+    echo "openflow.sh: IPs not defined"
 else
     # Instalar dependencias necesarias
+    echo "h11:"$h11
+    echo "h12:"$h12
     echo "Instalando dependencias ..."
     cd ryu/
     pip install .
