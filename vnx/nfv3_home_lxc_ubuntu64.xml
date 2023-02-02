@@ -131,8 +131,7 @@ SPAIN
        ifconfig eth1 mtu 1380
        sed -i -e '/iface eth1 inet static/a \   mtu 1380' /etc/network/interfaces
     </exec>
-        </exec>
-        <exec seq="dhclient_h22" type="verbatim">
+    <exec seq="dhclient_h22" type="verbatim">
       dhclient
     </exec>
     <exec seq="retrieve_ip_h22" type="verbatim">
