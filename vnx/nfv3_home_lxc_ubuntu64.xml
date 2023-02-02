@@ -51,6 +51,16 @@ SPAIN
        ifconfig eth1 mtu 1380
        sed -i -e '/iface eth1 inet static/a \   mtu 1380' /etc/network/interfaces
     </exec>
+    <exec seq="dhclient_h11" type="verbatim">
+      dhclient
+    </exec>
+    <exec seq="retrieve_ip_h11" type="verbatim">
+      ifconfig | grep 192.168.255
+    </exec>
+    <exec seq="iperf3_h11" type="verbatim">
+      sudo apt-get update
+      sudo apt -y install iperf3 --fix-missing
+    </exec>
     <route type="ipv4" gw="192.168.255.1">0.0.0.0/0</route>
   </vm>   
   <vm name="h12" type="lxc" exec_mode="lxc-attach" arch="x86_64">
@@ -62,6 +72,16 @@ SPAIN
        # Change interface MTU
        ifconfig eth1 mtu 1380
        sed -i -e '/iface eth1 inet static/a \   mtu 1380' /etc/network/interfaces
+    </exec>
+    <exec seq="dhclient_h12" type="verbatim">
+      dhclient
+    </exec>
+    <exec seq="retrieve_ip_h12" type="verbatim">
+      ifconfig | grep 192.168.255
+    </exec>
+    <exec seq="iperf3_h12" type="verbatim">
+      sudo apt-get update
+      sudo apt -y install iperf3 --fix-missing
     </exec>
     <route type="ipv4" gw="192.168.255.1">0.0.0.0/0</route>
   </vm> 
