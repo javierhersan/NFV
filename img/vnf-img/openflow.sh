@@ -69,10 +69,12 @@ else
     # Link max: 6 Mbps 
     # Queue 0 - h11 : min 4 Mbps
     # Queue 1 - h12 : max 2 Mbps
-    #$ACC_EXEC_1 curl -X POST -d '{"port_name": "vxlanint", "type": "linux-htb", "max_rate": "6000000", "queues": [{"min_rate": "4000000"}, {"max_rate": "2000000"}]}' http://localhost:8080/qos/queue/0000000000000001
+    $ACC_EXEC_1 curl -X POST -d '{"port_name": "vxlanint", "type": "linux-htb", "max_rate": "6000000", "queues": [{"min_rate": "4000000"}, {"max_rate": "2000000"}]}' http://localhost:8080/qos/queue/0000000000000001
     # Which traffic goes to each queue 
-    #$ACC_EXEC_1 curl -X POST -d '{"match": {"dl_src": "02:fd:00:04:00:01", "dl_type": "IPv4"}, "actions":{"queue": "0"}}' http://localhost:8080/qos/rules/0000000000000001
-    #$ACC_EXEC_1 curl -X POST -d '{"match": {"dl_src": "02:fd:00:04:01:01", "dl_type": "IPv4"}, "actions":{"queue": "1"}}' http://localhost:8080/qos/rules/0000000000000001
+    # MAC h11: 02:fd:00:04:00:01
+    # MAC h12: 02:fd:00:04:01:01
+    $ACC_EXEC_1 curl -X POST -d '{"match": {"dl_src": "02:fd:00:04:00:01", "dl_type": "IPv4"}, "actions":{"queue": "0"}}' http://localhost:8080/qos/rules/0000000000000001
+    $ACC_EXEC_1 curl -X POST -d '{"match": {"dl_src": "02:fd:00:04:01:01", "dl_type": "IPv4"}, "actions":{"queue": "1"}}' http://localhost:8080/qos/rules/0000000000000001
 
 
 fi
